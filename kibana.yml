@@ -1,9 +1,18 @@
+elastic:
+  apm:
+    active: true
+    serverUrl: "http://4.3.2.1:8200"
+    secretToken: supersecretoken
 server.host: "0.0.0.0"
 telemetry.enabled: "true"
 xpack.fleet.packages:
   - name: fleet_server
     version: latest
   - name: system
+    version: latest
+  - name: elastic_agent
+    version: latest
+  - name: apm
     version: latest
 xpack.fleet.agentPolicies:
   - name: Fleet-Server-Policy
@@ -13,3 +22,15 @@ xpack.fleet.agentPolicies:
       - name: fleet_server-1
         package:
           name: fleet_server
+      - name: apm-1
+        package:
+          name: apm
+        inputs:
+        - type: apm
+          enabled: true
+          vars:
+          - name: host
+            value: 0.0.0.0:8200
+          - name: secret_token
+            value: supersecrettoken
+    is_default_fleet_server: "true"

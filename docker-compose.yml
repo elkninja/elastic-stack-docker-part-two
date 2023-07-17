@@ -14,10 +14,12 @@ volumes:
     driver: local
   fleetserverdata:
     driver: local
+
 networks:
   default:
     name: elastic
     external: false
+
 services:
   setup:
     image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
@@ -79,6 +81,7 @@ services:
       interval: 1s
       timeout: 5s
       retries: 120
+
   es01:
     depends_on:
       setup:
@@ -122,6 +125,7 @@ services:
       interval: 10s
       timeout: 10s
       retries: 120
+
   kibana:
     depends_on:
       es01:
@@ -149,6 +153,7 @@ services:
       - SERVER_SSL_CERTIFICATE=config/certs/kibana/kibana.crt
       - SERVER_SSL_KEY=config/certs/kibana/kibana.key
       - SERVER_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt
+
     mem_limit: ${KB_MEM_LIMIT}
     healthcheck:
       test:
@@ -159,6 +164,7 @@ services:
       interval: 10s
       timeout: 10s
       retries: 120
+
   metricbeat01:
     depends_on:
       es01:
@@ -183,6 +189,7 @@ services:
       - LOGSTASH_HOSTS=http://logstash01:9600
     command:
       -strict.perms=false
+
   filebeat01:
     depends_on:
       es01:
@@ -204,6 +211,7 @@ services:
       - LOGSTASH_HOSTS=http://logstash01:9600
     command:
       -strict.perms=false
+
   logstash01:
     depends_on:
       es01:
@@ -224,38 +232,55 @@ services:
       - ELASTIC_USER=elastic
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
       - ELASTIC_HOSTS=https://es01:9200
-  
+
   fleet-server:
-      depends_on:
-        kibana:
-          condition: service_healthy
-        es01:
-          condition: service_healthy
-      image: docker.elastic.co/beats/elastic-agent-complete:${STACK_VERSION}
-      volumes:
-        - certs:/certs
-        - fleetserverdata:/usr/share/elastic-agent
-        - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
-        - "/var/run/docker.sock:/var/run/docker.sock:ro"
-        - "/sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro"
-        - "/proc:/hostfs/proc:ro"
-        - "/:/hostfs:ro"
-      ports:
-        - ${FLEET_PORT}:8220
-      restart: always
-      user: root
-      environment:
-        - FLEET_ENROLL=1
-        - FLEET_SERVER_POLICY_ID=fleet-server-policy
-        - FLEET_SERVER_ENABLE=1
-        - KIBANA_FLEET_SETUP=1
-        - KIBANA_HOST=https://kibana:5601
-        - FLEET_URL=https://fleet-server:8220
-        - FLEET_SERVER_ELASTICSEARCH_HOST=https://es01:9200
-        - FLEET_CA=/certs/ca/ca.crt
-        - KIBANA_FLEET_USERNAME=elastic
-        - KIBANA_FLEET_PASSWORD=${ELASTIC_PASSWORD}
-        - FLEET_SERVER_CERT=/certs/fleet-server/fleet-server.crt
-        - FLEET_SERVER_CERT_KEY=/certs/fleet-server/fleet-server.key
-        - FLEET_SERVER_ELASTICSEARCH_CA=/certs/ca/ca.crt
-        - KIBANA_FLEET_CA=/certs/ca/ca.crt
+    depends_on:
+      kibana:
+        condition: service_healthy
+      es01:
+        condition: service_healthy
+    image: docker.elastic.co/beats/elastic-agent:${STACK_VERSION}
+    volumes:
+      - certs:/certs
+      - fleetserverdata:/usr/share/elastic-agent
+      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro"
+      - "/proc:/hostfs/proc:ro"
+      - "/:/hostfs:ro"
+    ports:
+      - ${FLEET_PORT}:8220
+      - ${APMSERVER_PORT}:8200
+    user: root
+    environment:
+      - SSL_CERTIFICATE_AUTHORITIES=/certs/ca/ca.crt
+      - CERTIFICATE_AUTHORITIES=/certs/ca/ca.crt
+      - FLEET_CA=/certs/ca/ca.crt
+      - FLEET_ENROLL=1
+      - FLEET_INSECURE=true
+      - FLEET_SERVER_ELASTICSEARCH_CA=/certs/ca/ca.crt
+      - FLEET_SERVER_ELASTICSEARCH_HOST=https://es01:9200
+      - FLEET_SERVER_ELASTICSEARCH_INSECURE=true
+      - FLEET_SERVER_ENABLE=1
+      - FLEET_SERVER_CERT=/certs/fleet-server/fleet-server.crt
+      - FLEET_SERVER_CERT_KEY=/certs/fleet-server/fleet-server.key
+      - FLEET_SERVER_INSECURE_HTTP=true
+      - FLEET_SERVER_POLICY_ID=fleet-server-policy
+      - FLEET_URL=https://fleet-server:8220
+      - KIBANA_FLEET_CA=/certs/ca/ca.crt
+      - KIBANA_FLEET_SETUP=1
+      - KIBANA_FLEET_USERNAME=elastic
+      - KIBANA_FLEET_PASSWORD=${ELASTIC_PASSWORD}
+      - KIBANA_HOST=https://kibana:5601
+
+  webapp:
+    build:
+      context: app
+    volumes:
+      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro"
+      - "/proc:/hostfs/proc:ro"
+      - "/:/hostfs:ro"
+    ports:
+      - 8000:8000
