@@ -1,8 +1,8 @@
 elastic:
   apm:
     active: true
-    serverUrl: "http://4.3.2.1:8200"
-    secretToken: supersecretoken
+    serverUrl: "http://fleet-server:8200"
+    secretToken: ${ELASTIC_APM_SECRET_TOKEN}
 server.host: "0.0.0.0"
 telemetry.enabled: "true"
 xpack.fleet.packages:
@@ -32,5 +32,5 @@ xpack.fleet.agentPolicies:
           - name: host
             value: 0.0.0.0:8200
           - name: secret_token
-            value: supersecrettoken
+            value: ${ELASTIC_APM_SECRET_TOKEN}
     is_default_fleet_server: "true"

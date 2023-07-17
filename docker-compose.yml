@@ -153,7 +153,7 @@ services:
       - SERVER_SSL_CERTIFICATE=config/certs/kibana/kibana.crt
       - SERVER_SSL_KEY=config/certs/kibana/kibana.key
       - SERVER_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt
-
+      - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
     mem_limit: ${KB_MEM_LIMIT}
     healthcheck:
       test:
@@ -187,6 +187,11 @@ services:
       - ELASTIC_HOSTS=https://es01:9200
       - KIBANA_HOSTS=https://kibana:5601
       - LOGSTASH_HOSTS=http://logstash01:9600
+      - CA_CERT=certs/ca/ca.crt
+      - ES_CERT=certs/es01/es01.crt
+      - ES_KEY=certs/es01/es01.key
+      - KB_CERT=certs/kibana/kibana.crt
+      - KB_KEY=certs/kibana/kibana.key
     command:
       -strict.perms=false
 
@@ -209,6 +214,7 @@ services:
       - ELASTIC_HOSTS=https://es01:9200
       - KIBANA_HOSTS=https://kibana:5601
       - LOGSTASH_HOSTS=http://logstash01:9600
+      - CA_CERT=certs/ca/ca.crt
     command:
       -strict.perms=false
 

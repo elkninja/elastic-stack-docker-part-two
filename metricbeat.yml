@@ -11,9 +11,9 @@ metricbeat.modules:
   password: ${ELASTIC_PASSWORD}
   ssl:
     enabled: true
-    certificate_authorities: "certs/ca/ca.crt"
-    certificate: "certs/es01/es01.crt"
-    key: "certs/es01/es01.key"
+    certificate_authorities: ${CA_CERT}
+    #certificate: ${ES_CERT}
+    #key: ${ES_KEY}
 
 - module: logstash
   xpack.enabled: true
@@ -30,9 +30,9 @@ metricbeat.modules:
   xpack.enabled: true
   ssl:
     enabled: true
-    certificate: "certs/kibana/kibana.crt"
-    certificate_authorities: "certs/ca/ca.crt"
-    key: "certs/kibana/kibana.key"
+    certificate_authorities: ${CA_CERT}
+    #certificate: ${KB_CERT}
+    #key: ${KB_KEY}
 
 - module: docker
   metricsets:
@@ -57,7 +57,6 @@ output.elasticsearch:
   username: ${ELASTIC_USER}
   password: ${ELASTIC_PASSWORD}
   ssl:
-    certificate: "certs/es01/es01.crt"
-    certificate_authorities: "certs/ca/ca.crt"
-    key: "certs/es01/es01.key"
+    enabled: true
+    certificate_authorities: ${CA_CERT}
 
