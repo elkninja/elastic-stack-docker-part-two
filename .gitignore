@@ -2,3 +2,4 @@ app/.venv
 app/__pycache__
 troubleshooting.txt
 TODO.md
+elastic-stack-docker-part-two.wg

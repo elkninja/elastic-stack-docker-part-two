@@ -1,20 +1,22 @@
-# elastic-stack-docker-part-two
+# Elastic Stack on Docker, Part Two
  
-# resources:
+## Resources:
+### Fleet/Agent
+Policy Creation, No UI: https://www.elastic.co/guide/en/fleet/current/create-a-policy-no-ui.html
 
-https://www.elastic.co/guide/en/fleet/current/create-a-policy-no-ui.html
-https://www.elastic.co/guide/en/fleet/current/add-fleet-server-on-prem.html
-https://www.elastic.co/guide/en/fleet/current/elastic-agent-container.html
+Adding Fleet On-Prem: https://www.elastic.co/guide/en/fleet/current/add-fleet-server-on-prem.html
 
-air gapped env:
-https://www.elastic.co/guide/en/fleet/8.8/air-gapped.html
+Agent in a Container: https://www.elastic.co/guide/en/fleet/current/elastic-agent-container.html
 
-secure fleet:
-https://www.elastic.co/guide/en/fleet/current/secure-connections.html
-https://www.elastic.co/guide/en/fleet/current/secure-connections.html#_encrypt_traffic_between_elastic_agents_fleet_server_and_elasticsearch
+Air Gapped: https://www.elastic.co/guide/en/fleet/current/air-gapped.html
 
-enterprise search:
-https://www.elastic.co/guide/en/enterprise-search/current/docker.html
+Secure Fleet: https://www.elastic.co/guide/en/fleet/current/secure-connections.html
 
+### APM:
 
+APM:
+https://www.elastic.co/guide/en/apm/guide/current/upgrade-to-apm-integration.html
 
+On Prem: https://www.elastic.co/guide/en/apm/guide/current/apm-integration-upgrade-steps.html
+
+Fleet-Managed: https://www.elastic.co/guide/en/fleet/8.8/install-fleet-managed-elastic-agent.html
