@@ -12,8 +12,6 @@ metricbeat.modules:
   ssl:
     enabled: true
     certificate_authorities: ${CA_CERT}
-    #certificate: ${ES_CERT}
-    #key: ${ES_KEY}
 
 - module: logstash
   xpack.enabled: true
@@ -31,8 +29,6 @@ metricbeat.modules:
   ssl:
     enabled: true
     certificate_authorities: ${CA_CERT}
-    #certificate: ${KB_CERT}
-    #key: ${KB_KEY}
 
 - module: docker
   metricsets:

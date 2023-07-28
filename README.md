@@ -2,6 +2,9 @@
  
 ## Resources:
 ### Fleet/Agent
+
+Overview: https://www.elastic.co/guide/en/fleet/current/fleet-overview.html
+
 Policy Creation, No UI: https://www.elastic.co/guide/en/fleet/current/create-a-policy-no-ui.html
 
 Adding Fleet On-Prem: https://www.elastic.co/guide/en/fleet/current/add-fleet-server-on-prem.html
@@ -20,3 +23,6 @@ https://www.elastic.co/guide/en/apm/guide/current/upgrade-to-apm-integration.htm
 On Prem: https://www.elastic.co/guide/en/apm/guide/current/apm-integration-upgrade-steps.html
 
 Fleet-Managed: https://www.elastic.co/guide/en/fleet/8.8/install-fleet-managed-elastic-agent.html
+
+Queue Full Error:
+https://www.elastic.co/guide/en/apm/server/current/common-problems.html#queue-full

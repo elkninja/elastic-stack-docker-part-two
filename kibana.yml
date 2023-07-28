@@ -18,10 +18,19 @@ xpack.fleet.agentPolicies:
   - name: Fleet-Server-Policy
     id: fleet-server-policy
     namespace: default
+    monitoring_enabled: 
+      - logs
+      - metrics
     package_policies:
       - name: fleet_server-1
         package:
           name: fleet_server
+      - name: system-1
+        package:
+          name: system
+      - name: elastic_agent-1
+        package:
+          name: elastic_agent
       - name: apm-1
         package:
           name: apm
@@ -33,4 +42,3 @@ xpack.fleet.agentPolicies:
             value: 0.0.0.0:8200
           - name: secret_token
             value: ${ELASTIC_APM_SECRET_TOKEN}
-    is_default_fleet_server: "true"
