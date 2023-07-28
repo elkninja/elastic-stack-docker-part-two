@@ -1,4 +1,4 @@
-# Elastic Stack on Docker, Part Two
+# Elastic Stack and Docker Compose: Elastic Agent, Fleet, and Elastic APM
  
 ## Resources:
 ### Fleet/Agent
