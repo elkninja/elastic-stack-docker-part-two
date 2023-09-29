@@ -3,3 +3,7 @@ app/__pycache__
 troubleshooting.txt
 TODO.md
 elastic-stack-docker-part-two.wg
+.DS_Store
+.gitignore
+new-arch.excalidraw
+base-arch.excalidraw
