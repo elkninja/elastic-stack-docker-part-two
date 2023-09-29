@@ -1,4 +1,6 @@
-# Elastic Stack on Docker, Part Two
+# Elastic Stack and Docker Compose: Elastic Agent, Fleet, and Elastic APM
+
+This is a follow-up article being written that relates to https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose
  
 ## Resources:
 ### Fleet/Agent
