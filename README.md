@@ -1,6 +1,14 @@
-# Elastic Stack and Docker Compose: Elastic Agent, Fleet, and Elastic APM
+# Getting started with the Elastic Stack and Docker Compose: Part 2
+## Elastic Agent, Fleet, and Elastic APM
 
-This is a follow-up article being written that relates to https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose
+This repo is in reference to the blog [Getting Started with the Elastic Stack and Docker Compose: Part 2](https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose-part-2)
+
+You can read the first blog: [Getting Started with the Elastic Stack and Docker Compose](https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose) or visit it's [GitHub repo](https://github.com/elkninja/elastic-stack-docker-part-one)
+
+Please feel free to ask any questions via issues [here](https://github.com/elkninja/elastic-stack-docker-part-two/issues), our [Community Slack](https://ela.st/slack), or over in our [Discuss Forums](https://discuss.elastic.co/).
+
+Pull Requests welcome :)
+
  
 ## Resources:
 ### Fleet/Agent
